@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 using static NUnit.Framework.Assert;
@@ -785,6 +786,28 @@ namespace Swifter.Test
 
             //Catch(() => jsonFormatter.Deserialize<int?>("\" \n\r \t \\\"\""));
         }
+
+        [Test]
+        public void EmptyArrayTest()
+        {
+            var jsonFormatter = new JsonFormatter(JsonFormatterOptions.EmptyStringAsNull);
+
+            // We need to set the MinSize low so we can observe a specific bug.
+            var prop = typeof(HGlobalCache<char>).GetField("AbsolutelyMinSize", BindingFlags.Public | BindingFlags.Static);
+            
+            prop.SetValue(null, 1);
+            HGlobalCache<char>.MinSize = 1;
+
+            var obj = new Dictionary<string, object>
+            {
+                ["ABCDEFGHI"] = new string[0]
+            };
+
+            var json = jsonFormatter.Serialize(obj);
+
+            AreEqual(json, "{\"ABCDEFGHI\":[]}");
+        }
+
 
         public class NestingObject
         {
