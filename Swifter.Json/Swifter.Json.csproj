@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net20;net35;net40;net45;net47;netstandard2.0;netcoreapp2.0;netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>net20;net35;net40;net45;net47;net472;netstandard2.0;netcoreapp2.0;netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Version>1.5.0</Version>
     <Authors>Dogwei</Authors>
@@ -48,6 +48,9 @@
     <DefineConstants>Async;Dynamic;</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net47'">
+    <DefineConstants>Async;Dynamic;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net472'">
     <DefineConstants>Async;Dynamic;</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">

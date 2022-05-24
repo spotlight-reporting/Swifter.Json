@@ -3,3 +3,8 @@
 ################################################################################
 
 /Swifter.FSharpTest/obj
+*/bin/Debug/*
+*/obj/*
+*.dtbcache*
+*.suo
+.vs/Swifter/*/TestStore/*

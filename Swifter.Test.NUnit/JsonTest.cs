@@ -808,6 +808,26 @@ namespace Swifter.Test
             AreEqual(json, "{\"ABCDEFGHI\":[]}");
         }
 
+        [Test]
+        public void EmptyArrayComplexTypeTest()
+        {
+            var jsonFormatter = new JsonFormatter(JsonFormatterOptions.EmptyStringAsNull);
+
+            // We need to set the MinSize low so we can observe a specific bug.
+            var prop = typeof(HGlobalCache<char>).GetField("AbsolutelyMinSize", BindingFlags.Public | BindingFlags.Static);
+
+            prop.SetValue(null, 1);
+            HGlobalCache<char>.MinSize = 1;
+
+            var obj = new Dictionary<string, NestingObject[]>
+            {
+                ["ABCDEFGHI"] = new NestingObject[0]
+            };
+
+            var json = jsonFormatter.Serialize(obj);
+
+            AreEqual(json, "{\"ABCDEFGHI\":[]}");
+        }
 
         public class NestingObject
         {

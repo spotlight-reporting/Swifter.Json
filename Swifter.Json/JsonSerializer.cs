@@ -555,13 +555,13 @@ namespace Swifter.Json
 
                 --depth;
 
-                Expand(2);
-
                 if (tCurrent != current)
                 {
                     --current;
                 }
             }
+
+            Expand(2);
 
             AppendStructAfter();
 
